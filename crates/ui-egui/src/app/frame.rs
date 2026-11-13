@@ -5,11 +5,23 @@ use super::{
 use crate::startup;
 
 impl LightcraftApp {
+    /// Install the complete look before a host captures it, without running background work.
+    pub fn install_look(&mut self, ctx: &egui::Context) {
+        crate::i18n::set_language(self.ui.language);
+        theme::install_fonts_with_chinese(ctx, self.chinese_font.as_ref());
+        theme::apply_kind(ctx, self.ui.settings.theme(self.system_theme(ctx)));
+    }
+
+    /// The same definitions installed by `install_look`, safe before egui's first pass.
+    pub fn font_definitions(&self) -> egui::FontDefinitions {
+        crate::i18n::set_language(self.ui.language);
+        theme::font_definitions_with_chinese(lightcraft_engine::CRAFT_FONTS, self.chinese_font.as_ref())
+    }
+
     /// Install/refresh fonts once and watch the device and availability caches. Setup, not input.
     pub(super) fn ensure_fonts(&mut self, ctx: &egui::Context) {
         if !self.styled {
-            theme::install_fonts_with_chinese(ctx, self.chinese_font.as_ref());
-            theme::apply(ctx);
+            self.install_look(ctx);
             Self::drop_legacy_panel_state(ctx);
             // File → Add from Device lists cards scanned in the background: show hot-plugs
             let repaint = ctx.clone();

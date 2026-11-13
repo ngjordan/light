@@ -137,7 +137,7 @@ mod tests {
     /// `add_filter`.
     #[test]
     fn no_dialog_bypasses_the_helper() {
-        let mut dirs = vec![std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("src")];
+        let mut dirs = vec![std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../apps/lightcraft/src")];
         let mut helper_used = false;
         while let Some(dir) = dirs.pop() {
             for path in std::fs::read_dir(&dir).unwrap().map(|entry| entry.unwrap().path()) {

@@ -1,0 +1,43 @@
+[package]
+name = "iridium-light-shell"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[features]
+default = ["denoise"]
+denoise = ["lightcraft-engine/denoise"]
+rawnind-model = ["denoise", "lightcraft-engine/rawnind-model"]
+heif = ["lightcraft-codecs/heif"]
+
+[dependencies]
+lightcraft-engine = { workspace = true, features = ["sam"] }
+lightcraft-ui-egui.workspace = true
+lightcraft-codecs.workspace = true
+lightcraft-raster.workspace = true
+egui.workspace = true
+eframe = { workspace = true, features = ["glow", "x11", "wayland"] }
+rfd.workspace = true
+serde_json.workspace = true
+log.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus.workspace = true
+
+[target.'cfg(target_os = "macos")'.dependencies]
+muda.workspace = true
+objc2.workspace = true
+objc2-app-kit.workspace = true
+objc2-foundation.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+lightcraft-wincolor.workspace = true
+raw-window-handle = "0.6"
+
+[dev-dependencies]
+lightcraft-testkit.workspace = true

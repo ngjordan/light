@@ -3,13 +3,26 @@ use super::platform::DIALOG_PARENT;
 use super::platform::{explorer_select_command, file_dialog, windows_open_url_command};
 use super::prefs::display_profile_dir;
 use super::*;
+use lightcraft_ui_egui::panels::library_problem::Launch;
 
 /// The platform services; `cc` is the window the file dialogs belong to (its `egui_ctx` repaints
 /// when a dialog closes), and `log_file` is for Help ▸ Open Log Folder.
 pub(crate) fn services(cc: &eframe::CreationContext<'_>, log_file: Option<&std::path::Path>) -> Services {
-    let ctx = cc.egui_ctx.clone();
     #[cfg(any(target_os = "linux", target_os = "freebsd"))]
     let _ = DIALOG_PARENT.set(rfd::FileDialog::new().set_parent(cc));
+    #[allow(unused_mut)]
+    let mut services = services_for_host(&cc.egui_ctx, log_file);
+    #[cfg(windows)]
+    {
+        services.screen_profile = win_screen_profile::service(cc);
+    }
+    services
+}
+
+/// Platform services available without a native window handle. Without that handle Windows
+/// uses the explicit display profile / sRGB instead of automatic monitor-profile detection.
+pub(crate) fn services_for_host(ctx: &egui::Context, log_file: Option<&std::path::Path>) -> Services {
+    let ctx = ctx.clone();
     Services {
         local_places: None,
         // Commands' file dialogs run on their own thread (#191): a dialog on the UI thread
@@ -147,7 +160,7 @@ pub(crate) fn services(cc: &eframe::CreationContext<'_>, log_file: Option<&std::
         // Windows: the profile it uses for the window's monitor, unless it colour-manages the
         // desktop itself (HDR, Auto Color Management)
         #[cfg(windows)]
-        screen_profile: win_screen_profile::service(cc),
+        screen_profile: None,
         #[cfg(not(any(target_os = "macos", target_os = "linux", windows)))]
         screen_profile: None,
         pick_display_profile: Some(Box::new(|| {
