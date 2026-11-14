@@ -117,7 +117,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/cull.rs:119", "crates/engine/src/cmd/cull.rs:24"]
 commands = ["photo.analyze"]
-note = "missing: culling at import is manual (not automatic)"
+note = "library.import takes cull: true, or an object of rejectBelow, pickBest, burstGap and similarity; it scores only the photos the import added and returns the result as cull in the report (library/specs.rs). The app's import dialog does not expose it yet."
 
 [verdict."lr-imp-move"]
 title = "Move on import [Classic]"
