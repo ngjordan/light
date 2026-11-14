@@ -1,6 +1,7 @@
 # Per-row verdicts, from a source audit of the handlers. level=read: handler located and
 # read/screened; a verdict without an evidence file is not a verdict.
 
+
 [verdict."lr-imp-add-dialog"]
 title = "Add photos/folders"
 verdict = "REAL"
@@ -63,7 +64,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:80"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-imp-profiles"]
 title = "Import profiles & presets"
@@ -93,7 +94,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/codecs/src/lib.rs:167", "crates/raw/src/lib.rs:1"]
 commands = []
-# missing: some raw variants stay preview-only (compressed ORF withdrawn, PowerShot compacts, DSC-R1 crop/WB)
+note = "missing: some raw variants stay preview-only (compressed ORF withdrawn, PowerShot compacts, DSC-R1 crop/WB)"
 
 [verdict."lr-imp-preview-read"]
 title = "Preview reads the header, not the raw"
@@ -108,7 +109,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/raw/tests/it/corpus.rs:22", "docs/raw/evidence.tsv:1"]
 commands = []
-# missing: verified per-model on ~55 CC0 files and samples against Lightroom's >1,000 bodies
+note = "missing: verified per-model on ~55 CC0 files and samples against Lightroom's >1,000 bodies"
 
 [verdict."lr-imp-cull-at-import"]
 title = "Culling analysis at import"
@@ -116,7 +117,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/cull.rs:119", "crates/engine/src/cmd/cull.rs:24"]
 commands = ["photo.analyze"]
-# missing: culling at import is manual (not automatic)
+note = "missing: culling at import is manual (not automatic)"
 
 [verdict."lr-imp-move"]
 title = "Move on import [Classic]"
@@ -180,7 +181,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:101"]
 commands = []
-# needs a sharing service; none exists
+note = "needs a sharing service; none exists"
 
 [verdict."lr-lib-offline"]
 title = "Keep album offline"
@@ -188,7 +189,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:102"]
 commands = []
-# not applicable: local-first library
+note = "not applicable: local-first library"
 
 [verdict."lr-lib-target"]
 title = "Target album"
@@ -231,7 +232,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/face_detect.rs:302", "crates/engine/src/cmd/face_detect.rs:249", "crates/ui-egui/src/menus/ui_commands.rs:72"]
 commands = ["faces.detect", "view.people", "view.faceBoxes", "photo.removeRegion", "photo.setRegion", "library.filter"]
-# missing: MVP — face regions read-only from XMP; no Lightroom-equivalent people workflow
+note = "missing: MVP — face regions read-only from XMP; no Lightroom-equivalent people workflow"
 
 [verdict."lr-lib-stack"]
 title = "Stacks"
@@ -302,7 +303,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/cull.rs:119", "crates/engine/src/cmd/cull.rs:24", "crates/ui-egui/src/menus/ui_commands.rs:267"]
 commands = ["photo.analyze", "dialog.cull"]
-# missing: classical measures only — no eyes-closed / expression detection
+note = "missing: classical measures only — no eyes-closed / expression detection"
 
 [verdict."lr-lib-activity"]
 title = "Comments & likes"
@@ -310,7 +311,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:119"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-lib-quickcoll"]
 title = "Quick collection [Classic]"
@@ -381,7 +382,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:75", "crates/ui-egui/src/menus/run.rs:348", "crates/ui-egui/src/menus/ui_commands.rs:76"]
 commands = ["view.focusPoint", "view.zoomToFocus", "view.zoomToggle", "photo.reload", "photo.readFocusPoints", "focus.pump"]
-# missing: Sony ILCE-1 / 7SM3 focus points only; other bodies and makers not yet
+note = "missing: Sony ILCE-1 / 7SM3 focus points only; other bodies and makers not yet"
 
 [verdict."lr-view-navigator"]
 title = "Navigator mini map"
@@ -452,7 +453,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["apps/lightcraft/src/hdr_display.rs:1", "docs/parity-checklist.md:144"]
 commands = []
-# decision layer only: the window is always SDR (eframe 8-bit surface)
+note = "decision layer only: the window is always SDR (eframe 8-bit surface)"
 
 [verdict."lr-filt-search-meta"]
 title = "Text search"
@@ -467,7 +468,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:151"]
 commands = []
-# no natural-language / AI search exists
+note = "no natural-language / AI search exists"
 
 [verdict."lr-filt-rating"]
 title = "Rating filter"
@@ -524,7 +525,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:85"]
 commands = ["library.filter"]
-# missing: no People picker in the filter bar, one person at a time, no unnamed people
+note = "missing: no People picker in the filter bar, one person at a time, no unnamed people"
 
 [verdict."lr-filt-cull"]
 title = "Culling-score filters"
@@ -567,7 +568,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:699", "crates/engine/src/cmd/geocode.rs:311", "crates/engine/src/cmd/geocode.rs:126"]
 commands = ["photo.setMeta", "metadata.reverseGeocode"]
-# missing: no embedded map
+note = "missing: no embedded map"
 
 [verdict."lr-meta-copypaste"]
 title = "Copy / paste metadata"
@@ -624,7 +625,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/develop/src/controls.rs:181"]
 commands = []
-# missing: calibration and broader parity remain unverified (docs/light-v3.md)
+note = "missing: calibration and broader parity remain unverified (docs/light-v3.md)"
 
 [verdict."lr-edit-light-highlights"]
 title = "Highlights"
@@ -646,7 +647,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/develop/src/controls.rs:184"]
 commands = []
-# missing: calibration is a planned follow-up
+note = "missing: calibration is a planned follow-up"
 
 [verdict."lr-edit-light-blacks"]
 title = "Blacks"
@@ -654,7 +655,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/develop/src/controls.rs:185"]
 commands = []
-# missing: the deepest tones still differ from Lightroom
+note = "missing: the deepest tones still differ from Lightroom"
 
 [verdict."lr-edit-light-curve-param"]
 title = "Parametric curve"
@@ -823,7 +824,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["docs/denoise.md:12", "crates/denoise-core/src/builtin.rs:1"]
 commands = []
-# missing: Bayer raws only; bundled classical denoiser (optional ONNX models), not Lightroom's AI Denoise
+note = "missing: Bayer raws only; bundled classical denoiser (optional ONNX models), not Lightroom's AI Denoise"
 
 [verdict."lr-edit-detail-rawdetails"]
 title = "Improved demosaic toggle"
@@ -831,7 +832,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/develop/src/settings.rs:1452", "crates/engine/src/cmd.rs:143"]
 commands = []
-# settings field only; no renderer reads raw_details
+note = "settings field only; no renderer reads raw_details"
 
 [verdict."lr-edit-detail-superres"]
 title = "Super resolution"
@@ -839,7 +840,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/develop/src/settings.rs:1453", "crates/engine/src/cmd.rs:143"]
 commands = []
-# settings field only; no renderer reads super_resolution
+note = "settings field only; no renderer reads super_resolution"
 
 [verdict."lr-edit-detail-aisharpen"]
 title = "AI sharpen"
@@ -847,7 +848,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:214"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-edit-detail-hotpixels"]
 title = "Hot pixel removal"
@@ -869,7 +870,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/develop/src/controls.rs:274"]
 commands = []
-# missing: lens-profile coverage is partial (file-embedded corrections + a few NEF lenses)
+note = "missing: lens-profile coverage is partial (file-embedded corrections + a few NEF lenses)"
 
 [verdict."lr-edit-optics-defringe"]
 title = "Defringe"
@@ -919,7 +920,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:165", "crates/ui-egui/src/menus/run.rs:1040", "crates/engine/src/cmd/develop.rs:488"]
 commands = ["section.lensBlur", "lensBlur.brushStroke", "lensBlur.brushReset", "lensBlur.findSubject"]
-# missing: no depth map — the blur grows with distance from the focus as a stand-in
+note = "missing: no depth map — the blur grows with distance from the focus as a stand-in"
 
 [verdict."lr-edit-calib"]
 title = "Calibration [Classic]"
@@ -983,7 +984,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:239"]
 commands = []
-# no adaptive presets
+note = "no adaptive presets"
 
 [verdict."lr-prof-camera"]
 title = "Camera-matching looks"
@@ -991,7 +992,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:240"]
 commands = []
-# no camera-matching looks
+note = "no camera-matching looks"
 
 [verdict."lr-prof-cameracolor"]
 title = "Camera colour calibration (own)"
@@ -999,7 +1000,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/raw/src/color.rs:1", "crates/raw/src/profile.rs:1"]
 commands = []
-# missing: full camera-matching profiles missing (DNG matrices read per spec; fitted looks elsewhere)
+note = "missing: full camera-matching profiles missing (DNG matrices read per spec; fitted looks elsewhere)"
 
 [verdict."lr-prof-creative"]
 title = "Creative profiles (own)"
@@ -1014,7 +1015,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:243"]
 commands = []
-# no legacy profiles
+note = "no legacy profiles"
 
 [verdict."lr-prof-nonraw"]
 title = "Profiles for non-raw files"
@@ -1064,7 +1065,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/develop.rs:939"]
 commands = ["crop.autoStraighten"]
-# missing: capped at 5°; 50/113 hand-straightened photos come out straighter, 10 worse
+note = "missing: capped at 5°; 50/113 hand-straightened photos come out straighter, 10 worse"
 
 [verdict."lr-crop-angle"]
 title = "Angle slider"
@@ -1121,7 +1122,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:263"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-rem-contentaware"]
 title = "Content-aware remove"
@@ -1129,7 +1130,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/masks.rs:908"]
 commands = ["spot.add"]
-# missing: no generative fill
+note = "missing: no generative fill"
 
 [verdict."lr-rem-heal"]
 title = "Heal"
@@ -1151,7 +1152,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:272"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-rem-detect"]
 title = "Object detection for remove"
@@ -1159,7 +1160,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:273"]
 commands = []
-# no object detection for remove
+note = "no object detection for remove"
 
 [verdict."lr-rem-brush-params"]
 title = "Brush size / feather / opacity"
@@ -1188,7 +1189,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:277"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-rem-reflect"]
 title = "Remove reflections"
@@ -1196,7 +1197,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:278"]
 commands = []
-# no reflection detection
+note = "no reflection detection"
 
 [verdict."lr-rem-dust"]
 title = "Dust detection"
@@ -1246,7 +1247,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/masks.rs:254"]
 commands = ["mask.add"]
-# missing: saliency heuristic, no segmentation model (carried DNG person mattes when present)
+note = "missing: saliency heuristic, no segmentation model (carried DNG person mattes when present)"
 
 [verdict."lr-mask-sky"]
 title = "Select sky"
@@ -1254,7 +1255,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/masks.rs:254"]
 commands = ["mask.add"]
-# missing: heuristic sky detection (or a carried DNG sky matte), not a learned model
+note = "missing: heuristic sky detection (or a carried DNG sky matte), not a learned model"
 
 [verdict."lr-mask-background"]
 title = "Select background"
@@ -1262,7 +1263,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/masks.rs:254"]
 commands = ["mask.add"]
-# missing: inverse of the heuristic subject mask only
+note = "missing: inverse of the heuristic subject mask only"
 
 [verdict."lr-mask-objects"]
 title = "Object selection"
@@ -1270,7 +1271,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/masks.rs:254", "crates/engine/src/cmd/masks.rs:459"]
 commands = ["mask.add", "mask.objectPoint", "mask.refineDetail", "segment.prepare", "segment.model.status", "segment.model.download", "segment.model.cancel", "app.openSamModelFolder"]
-# missing: not verified against Lightroom's Select Object; no brush/box object mode; needs the opt-in SAM 3 model
+note = "missing: not verified against Lightroom's Select Object; no brush/box object mode; needs the opt-in SAM 3 model"
 
 [verdict."lr-mask-people"]
 title = "People parts"
@@ -1278,7 +1279,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/pipeline/src/masks.rs:113", "crates/develop/src/settings.rs:1101"]
 commands = []
-# no command or implementation (docs/parity-checklist.md:299)
+note = "no command or implementation (docs/parity-checklist.md:299)"
 
 [verdict."lr-mask-landscape"]
 title = "Landscape classes"
@@ -1286,7 +1287,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/pipeline/src/masks.rs:320"]
 commands = []
-# the Landscape shape evaluates empty (crates/pipeline/src/masks.rs:320)
+note = "the Landscape shape evaluates empty (crates/pipeline/src/masks.rs:320)"
 
 [verdict."lr-mask-brush"]
 title = "Brush mask"
@@ -1294,7 +1295,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:169", "crates/ui-egui/src/menus/run.rs:1056", "crates/engine/src/cmd/masks.rs:322"]
 commands = ["tool.brush", "mask.brushStroke"]
-# missing: no A/B brushes; no tilt; pen pressure only where winit reports force (Windows)
+note = "missing: no A/B brushes; no tilt; pen pressure only where winit reports force (Windows)"
 
 [verdict."lr-mask-linear"]
 title = "Linear gradient"
@@ -1330,7 +1331,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/pipeline/src/masks.rs:320"]
 commands = []
-# the DepthRange shape evaluates empty; no depth data sources
+note = "the DepthRange shape evaluates empty; no depth data sources"
 
 [verdict."lr-mask-combine"]
 title = "Add / subtract / intersect"
@@ -1401,7 +1402,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:316"]
 commands = []
-# no automatic AI-mask recomputation
+note = "no automatic AI-mask recomputation"
 
 [verdict."lr-mask-sync"]
 title = "Copy masks to other photos"
@@ -1416,7 +1417,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:318"]
 commands = []
-# no adaptive presets
+note = "no adaptive presets"
 
 [verdict."lr-pre-panel"]
 title = "Presets panel"
@@ -1452,7 +1453,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:328"]
 commands = []
-# no adaptive presets
+note = "no adaptive presets"
 
 [verdict."lr-pre-premium"]
 title = "Built-in presets (own)"
@@ -1467,7 +1468,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:330"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-pre-onimport"]
 title = "Apply during import"
@@ -1552,7 +1553,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/merge.rs:65", "crates/ui-egui/src/menus/ui_commands.rs:222", "crates/ui-egui/src/menus/run.rs:1277"]
 commands = ["merge.hdr", "dialog.mergeHdr"]
-# missing: AI Denoise does not run on merged DNGs; JPEG brackets treated as linear; frames held as 32-bit float
+note = "missing: AI Denoise does not run on merged DNGs; JPEG brackets treated as linear; frames held as 32-bit float"
 
 [verdict."lr-merge-pano"]
 title = "Panorama"
@@ -1581,7 +1582,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:366"]
 commands = []
-# no Enhance dialog
+note = "no Enhance dialog"
 
 [verdict."lr-enh-inplace"]
 title = "In-place enhance"
@@ -1589,7 +1590,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:367"]
 commands = []
-# no in-place enhance
+note = "no in-place enhance"
 
 [verdict."lr-hdr-edit"]
 title = "HDR editing"
@@ -1597,7 +1598,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/develop.rs:1039"]
 commands = ["develop.hdr"]
-# missing: CPU-only render, no on-screen HDR display; crs headroom / SDR rendition not read
+note = "missing: CPU-only render, no on-screen HDR display; crs headroom / SDR rendition not read"
 
 [verdict."lr-hdr-sdrpreview"]
 title = "SDR preview of HDR"
@@ -1605,7 +1606,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/develop/src/controls.rs:187"]
 commands = []
-# missing: no separate SDR-preview toggle until HDR display lands
+note = "missing: no separate SDR-preview toggle until HDR display lands"
 
 [verdict."lr-hdr-visualize"]
 title = "Visualize HDR range"
@@ -1627,7 +1628,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487"]
 commands = ["app.export"]
-# missing: no HEIC output (no permissive HEVC encoder)
+note = "missing: no HEIC output (no permissive HEVC encoder)"
 
 [verdict."lr-vid-play"]
 title = "Video playback"
@@ -1635,7 +1636,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["crates/catalog/src/model.rs:514", "docs/parity-checklist.md:383"]
 commands = []
-# videos can be catalogued (kind, duration); no player
+note = "videos can be catalogued (kind, duration); no player"
 
 [verdict."lr-vid-trim"]
 title = "Trim"
@@ -1643,7 +1644,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:384"]
 commands = []
-# no video trimming
+note = "no video trimming"
 
 [verdict."lr-vid-edit"]
 title = "Edits on video"
@@ -1651,7 +1652,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:385"]
 commands = []
-# no video editing
+note = "no video editing"
 
 [verdict."lr-vid-cover"]
 title = "Cover frame"
@@ -1659,7 +1660,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:386"]
 commands = []
-# no video cover frame
+note = "no video cover frame"
 
 [verdict."lr-vid-export"]
 title = "Video export"
@@ -1667,7 +1668,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:387"]
 commands = []
-# no video export
+note = "no video export"
 
 [verdict."lr-vid-photo2video"]
 title = "Photo to video (generative)"
@@ -1675,7 +1676,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:388"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-exp-dialog"]
 title = "Export dialog"
@@ -1732,7 +1733,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487"]
 commands = ["app.export"]
-# missing: no HDR presets yet
+note = "missing: no HDR presets yet"
 
 [verdict."lr-exp-sharpen"]
 title = "Output sharpening"
@@ -1754,7 +1755,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487"]
 commands = ["app.export"]
-# missing: horizontal Thai mark positioning incomplete; Arabic deferred until joining/bidi exist
+note = "missing: horizontal Thai mark positioning incomplete; Arabic deferred until joining/bidi exist"
 
 [verdict."lr-exp-naming"]
 title = "File naming"
@@ -1783,7 +1784,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487"]
 commands = ["app.export"]
-# missing: no embedded JPEG preview size option
+note = "missing: no embedded JPEG preview size option"
 
 [verdict."lr-exp-original"]
 title = "Original + XMP"
@@ -1798,7 +1799,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487"]
 commands = ["app.export"]
-# missing: not a menu command on selected photos (Lightroom adds the DNG next to the original)
+note = "missing: not a menu command on selected photos (Lightroom adds the DNG next to the original)"
 
 [verdict."lr-exp-photos"]
 title = "Export to the system photo library"
@@ -1806,7 +1807,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:277", "crates/ui-egui/src/menus/run.rs:1487", "crates/engine/src/cmd/export.rs:246"]
 commands = ["app.export", "export.addToPhotos", "export.photosImports"]
-# missing: macOS only (Apple Events); other platforms' photo libraries are not covered
+note = "missing: macOS only (Apple Events); other platforms' photo libraries are not covered"
 
 [verdict."lr-exp-psd"]
 title = "Round trip to an external editor"
@@ -1821,7 +1822,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:418"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-share-invite"]
 title = "Invite collaborators"
@@ -1829,7 +1830,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:419"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-share-webgallery"]
 title = "Web galleries"
@@ -1837,7 +1838,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:420"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-share-community"]
 title = "Community edits"
@@ -1845,7 +1846,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:421"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-map-info"]
 title = "Location in the info panel"
@@ -1853,7 +1854,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:699"]
 commands = ["photo.setMeta"]
-# missing: no map in the panel (Show on Map opens OpenStreetMap in the browser)
+note = "missing: no map in the panel (Show on Map opens OpenStreetMap in the browser)"
 
 [verdict."lr-map-module"]
 title = "Map module [Classic]"
@@ -1861,7 +1862,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:428"]
 commands = []
-# no Map module
+note = "no Map module"
 
 [verdict."lr-pref-general"]
 title = "General settings"
@@ -1883,7 +1884,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:436"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-pref-interface"]
 title = "Interface options"
@@ -1898,7 +1899,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:259", "crates/ui-egui/src/menus/run.rs:582"]
 commands = ["app.displayProfile"]
-# missing: X11 _ICC_PROFILE and per-monitor profiles on Linux
+note = "missing: X11 _ICC_PROFILE and per-monitor profiles on Linux"
 
 [verdict."lr-pref-performance"]
 title = "GPU / performance"
@@ -1913,7 +1914,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/face_models.rs:537", "crates/engine/src/cmd/face_models.rs:504", "crates/engine/src/cmd/face_models.rs:528"]
 commands = ["faces.enable", "faces.models.list", "faces.models.inspect", "faces.models.install", "faces.models.download", "faces.models.downloads", "faces.models.downloadCancel", "faces.models.remove", "faces.models.select", "dialog.faceModel"]
-# missing: thresholds calibrated on busts only; recogniser off until a model is installed
+note = "missing: thresholds calibrated on busts only; recogniser off until a model is installed"
 
 [verdict."lr-pref-watermark"]
 title = "Watermark settings"
@@ -1935,7 +1936,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:443"]
 commands = []
-# no early-access toggles
+note = "no early-access toggles"
 
 [verdict."lr-pref-notifications"]
 title = "Notifications"
@@ -1943,7 +1944,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:444"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-pref-device"]
 title = "Device settings"
@@ -1951,7 +1952,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:445"]
 commands = []
-# no device settings
+note = "no device settings"
 
 [verdict."lr-cloud-sync"]
 title = "Cloud sync"
@@ -1959,7 +1960,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:451"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-cloud-smartpreview"]
 title = "Editable proxies"
@@ -1974,7 +1975,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:453"]
 commands = []
-# no AI model update indicator
+note = "no AI model update indicator"
 
 [verdict."lr-ai-credits"]
 title = "Generative credits"
@@ -1982,7 +1983,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:454"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-behav-autosave"]
 title = "Instant autosave"
@@ -2046,7 +2047,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:235", "crates/ui-egui/src/menus/run.rs:583", "crates/ui-egui/src/menus/ui_commands.rs:236"]
 commands = ["file.backupLibrary", "file.restoreLibrary"]
-# missing: web build only (experimental): missing ?safe start, deleting originals of removed photos, zip64
+note = "missing: web build only (experimental): missing ?safe start, deleting originals of removed photos, zip64"
 
 [verdict."lr-behav-gpu"]
 title = "GPU acceleration"
@@ -2061,7 +2062,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/pipeline/src/lib.rs:72", "crates/pipeline/src/tone.rs:1"]
 commands = []
-# missing: Whites, Exposure / Highlights / Shadows calibration and broader camera coverage remain open
+note = "missing: Whites, Exposure / Highlights / Shadows calibration and broader camera coverage remain open"
 
 [verdict."lr-behav-dragdrop"]
 title = "Drag and drop"
@@ -2146,7 +2147,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/widgets/text_field.rs:1"]
 commands = []
-# missing: most dialogs, import, settings, masking and keyword fields still use egui's own field (no menu)
+note = "missing: most dialogs, import, settings, masking and keyword fields still use egui's own field (no menu)"
 
 [verdict."lr-behav-headless"]
 title = "Headless UI snapshots"
@@ -2161,7 +2162,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/widgets.rs:591", "crates/ui-egui/src/widgets.rs:443"]
 commands = []
-# missing: brush strokes and red-eye ellipses are pointer-only; not tried with a real screen reader
+note = "missing: brush strokes and red-eye ellipses are pointer-only; not tried with a real screen reader"
 
 [verdict."lr-behav-locale"]
 title = "Language options"
@@ -2176,7 +2177,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/i18n.rs:51", "docs/localization.md:1"]
 commands = []
-# missing: technical errors stay English; no Traditional Chinese font face; other-script faces are UI fallbacks
+note = "missing: technical errors stay English; no Traditional Chinese font face; other-script faces are UI fallbacks"
 
 [verdict."lr-behav-learn"]
 title = "Tutorials"
@@ -2184,7 +2185,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:487"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lr-behav-whatsnew"]
 title = "What's new"
@@ -2199,7 +2200,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:489"]
 commands = []
-# no Early Access AI features
+note = "no Early Access AI features"
 
 [verdict."lr-behav-titlebar"]
 title = "Title bar drag and double-click zoom (macOS)"
@@ -2207,7 +2208,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/panels/topbar.rs:11"]
 commands = []
-# missing: a dialog's backdrop does not dim the integrated title bar
+note = "missing: a dialog's backdrop does not dim the integrated title bar"
 
 [verdict."menu-bar"]
 title = "Menu bar rendering"
@@ -2236,7 +2237,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:502"]
 commands = []
-# no Updates command
+note = "no Updates command"
 
 [verdict."menu-app-sync"]
 title = "Sync status / pause"
@@ -2244,7 +2245,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:503"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-app-signout"]
 title = "Sign out"
@@ -2252,7 +2253,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:504"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-app-hide"]
 title = "Hide / hide others / show all"
@@ -2288,7 +2289,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:509"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-file-newalbum"]
 title = "New Album…"
@@ -2345,7 +2346,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:517"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-file-photoshop"]
 title = "Edit in external editor"
@@ -2374,7 +2375,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:521"]
 commands = []
-# not applicable: local-first
+note = "not applicable: local-first"
 
 [verdict."menu-file-close"]
 title = "Close Window"
@@ -2529,7 +2530,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:543"]
 commands = []
-# our History panel is `panel.activity`
+note = "our History panel is `panel.activity`"
 
 [verdict."menu-view-versions"]
 title = "Show/Hide versions"
@@ -2628,7 +2629,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:557"]
 commands = []
-# no HDR display output (see LR-VIEW-HDR-DISPLAY)
+note = "no HDR display output (see LR-VIEW-HDR-DISPLAY)"
 
 [verdict."menu-photo-addtoalbum"]
 title = "Add to album"
@@ -2706,7 +2707,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:568"]
 commands = []
-# no Enhance command
+note = "no Enhance command"
 
 [verdict."menu-photo-auto"]
 title = "Auto settings"
@@ -2735,7 +2736,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:572"]
 commands = []
-# no Update AI Info command
+note = "no Update AI Info command"
 
 [verdict."menu-photo-rename"]
 title = "Rename N photos…"
@@ -2771,7 +2772,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:577"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-window-minimize"]
 title = "Minimize / zoom"
@@ -2807,7 +2808,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:582"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."menu-help-whatsnew"]
 title = "What's new"
@@ -3025,7 +3026,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:67", "crates/ui-egui/src/menus/run.rs:327"]
 commands = ["library.selectOnlyActive"]
-# missing: the macOS native-menu path is not verified
+note = "missing: the macOS native-menu path is not verified"
 
 [verdict."key-pasteselected"]
 title = "Paste selected — ⇧⌘V"
@@ -3068,7 +3069,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:84", "crates/ui-egui/src/menus/run.rs:599"]
 commands = ["view.leftPanel"]
-# missing: ours binds ⌘⇧L (P is pick); differs from Lightroom's binding
+note = "missing: ours binds ⌘⇧L (P is pick); differs from Lightroom's binding"
 
 [verdict."key-linear"]
 title = "Linear gradient — L"
@@ -3230,7 +3231,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:107", "crates/ui-egui/src/menus/run.rs:762"]
 commands = ["view.histogram"]
-# missing: ours binds ⌘⇧H (⌘0 zooms to fit); differs from Lightroom's binding
+note = "missing: ours binds ⌘⇧H (⌘0 zooms to fit); differs from Lightroom's binding"
 
 [verdict."key-brushsize"]
 title = "Brush size — `[` / `]`"
@@ -3273,7 +3274,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:535"]
 commands = ["photo.pick"]
-# missing: ours binds P (Z toggles zoom); differs from Lightroom's binding
+note = "missing: ours binds P (Z toggles zoom); differs from Lightroom's binding"
 
 [verdict."key-unflag"]
 title = "Unflag — U"
@@ -3379,7 +3380,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:671"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."key-detect"]
 title = "Detect objects — ⌥⇧O"
@@ -3387,7 +3388,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:672"]
 commands = []
-# no object detection
+note = "no object detection"
 
 [verdict."key-crop-constrain"]
 title = "Lock crop aspect — A"
@@ -3472,7 +3473,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:684"]
 commands = []
-# no video playback
+note = "no video playback"
 
 [verdict."key-esc"]
 title = "Leave tool / view — Esc"
@@ -3501,7 +3502,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:118", "crates/ui-egui/src/menus/run.rs:842", "crates/ui-egui/src/menus/ui_commands.rs:114"]
 commands = ["view.toolOverlay", "view.maskPins", "panel.remove"]
-# missing: Remove's spot pins have no H hide toggle (⇧H only)
+note = "missing: Remove's spot pins have no H hide toggle (⇧H only)"
 
 [verdict."lrc-lib-import"]
 title = "Full import dialog"
@@ -3523,7 +3524,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:698"]
 commands = []
-# no tethered capture
+note = "no tethered capture"
 
 [verdict."lrc-lib-views"]
 title = "Grid / loupe / compare / survey / people"
@@ -3531,7 +3532,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:63", "crates/ui-egui/src/menus/run.rs:198", "crates/ui-egui/src/menus/ui_commands.rs:64"]
 commands = ["view.photoGrid", "view.squareGrid", "view.detail", "view.compare", "view.survey", "view.gridInfo"]
-# missing: no people view in the view set
+note = "missing: no people view in the view set"
 
 [verdict."lrc-lib-compare"]
 title = "Compare view"
@@ -3567,7 +3568,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:1304", "crates/engine/src/cmd/library/specs.rs:1314"]
 commands = ["library.inspectLightroom", "library.importLightroom", "file.importLightroom"]
-# missing: Adobe rendering, AI data and native history replay incomplete; no writes to Lightroom catalogs
+note = "missing: Adobe rendering, AI data and native history replay incomplete; no writes to Lightroom catalogs"
 
 [verdict."lrc-lib-catalog-lock"]
 title = "Catalog open in one program at a time"
@@ -3617,7 +3618,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:711"]
 commands = []
-# no publish services
+note = "no publish services"
 
 [verdict."lrc-lib-filterbar"]
 title = "Library filter bar"
@@ -3674,7 +3675,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:72", "crates/ui-egui/src/menus/run.rs:362", "crates/ui-egui/src/menus/ui_commands.rs:73"]
 commands = ["view.people", "view.person", "faces.person", "faces.unnamed", "faces.nameFaces"]
-# missing: no clusters with separators, no persistent reject, no merge of two people
+note = "missing: no clusters with separators, no persistent reject, no merge of two people"
 
 [verdict."lrc-lib-comments"]
 title = "Comments panel"
@@ -3682,7 +3683,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:720"]
 commands = []
-# no comments
+note = "no comments"
 
 [verdict."lrc-lib-visualsearch"]
 title = "Find similar photos"
@@ -3718,7 +3719,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/previews.rs:966", "crates/engine/src/cmd/previews.rs:969"]
 commands = ["prefs.backgroundPrep", "prefs.setBackgroundPrep"]
-# missing: face detection, AI masks and AI Denoise are not background jobs of these settings
+note = "missing: face detection, AI masks and AI Denoise are not background jobs of these settings"
 
 [verdict."lrc-lib-slideshow-impromptu"]
 title = "Impromptu slideshow"
@@ -3747,7 +3748,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:106", "crates/ui-egui/src/menus/run.rs:761"]
 commands = ["view.softProof"]
-# missing: output-device profile 3D tables run on the CPU (the row's only stated limit)
+note = "missing: output-device profile 3D tables run on the CPU (the row's only stated limit)"
 
 [verdict."lrc-dev-autosync"]
 title = "Sync / auto sync / paste previous"
@@ -3797,7 +3798,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:137", "crates/ui-egui/src/menus/run.rs:508"]
 commands = ["view.viewOptions"]
-# missing: the Grid View tab, more fields (ratings, metadata, copy name), the video-frame option
+note = "missing: the Grid View tab, more fields (ratings, metadata, copy name), the video-frame option"
 
 [verdict."lrc-dev-loupeoverlay"]
 title = "Loupe overlay: layout image"
@@ -3805,7 +3806,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:138", "crates/ui-egui/src/menus/run.rs:509", "crates/ui-egui/src/menus/ui_commands.rs:139"]
 commands = ["view.chooseLayoutImage", "view.layoutImage", "view.layoutImageOpacity", "view.layoutImageMatte"]
-# missing: Grid and Guides overlays, ⌘-drag move/resize, free opacity / matte sliders
+note = "missing: Grid and Guides overlays, ⌘-drag move/resize, free opacity / matte sliders"
 
 [verdict."lrc-dev-video"]
 title = "Video frame capture"
@@ -3813,7 +3814,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:738"]
 commands = []
-# no video in Develop
+note = "no video in Develop"
 
 [verdict."lrc-dev-histogram-drag"]
 title = "Drag on the histogram to adjust tone regions"
@@ -3828,7 +3829,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:740"]
 commands = []
-# no Map view
+note = "no Map view"
 
 [verdict."lrc-map-geotag"]
 title = "Drag photos onto the map"
@@ -3836,7 +3837,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:741"]
 commands = []
-# no GPX geotagging UI in a map
+note = "no GPX geotagging UI in a map"
 
 [verdict."lrc-map-locations"]
 title = "Saved locations"
@@ -3844,7 +3845,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:742"]
 commands = []
-# no saved locations
+note = "no saved locations"
 
 [verdict."lrc-map-tracklog"]
 title = "GPS track logs"
@@ -3859,7 +3860,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:744"]
 commands = []
-# no map filtering
+note = "no map filtering"
 
 [verdict."lrc-map-revgeo"]
 title = "Reverse geocoding"
@@ -3867,7 +3868,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/geocode.rs:311", "crates/engine/src/cmd/geocode.rs:126"]
 commands = ["metadata.reverseGeocode"]
-# missing: no sublocation (City / State / Country only, towns ≥15,000 people)
+note = "missing: no sublocation (City / State / Country only, towns ≥15,000 people)"
 
 [verdict."lrc-book-settings"]
 title = "Book settings"
@@ -3875,7 +3876,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:746"]
 commands = []
-# no Book module
+note = "no Book module"
 
 [verdict."lrc-book-autolayout"]
 title = "Book auto layout"
@@ -3883,7 +3884,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:747"]
 commands = []
-# no auto-layout
+note = "no auto-layout"
 
 [verdict."lrc-book-page"]
 title = "Book pages & templates"
@@ -3891,7 +3892,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:748"]
 commands = []
-# no page editing
+note = "no page editing"
 
 [verdict."lrc-book-guides"]
 title = "Book guides"
@@ -3899,7 +3900,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:749"]
 commands = []
-# no page guides
+note = "no page guides"
 
 [verdict."lrc-book-cell"]
 title = "Book cell padding"
@@ -3907,7 +3908,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:750"]
 commands = []
-# no cell editing
+note = "no cell editing"
 
 [verdict."lrc-book-text"]
 title = "Book photo/page text"
@@ -3915,7 +3916,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:751"]
 commands = []
-# no text editing
+note = "no text editing"
 
 [verdict."lrc-book-type"]
 title = "Book typography"
@@ -3923,7 +3924,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:752"]
 commands = []
-# no type controls
+note = "no type controls"
 
 [verdict."lrc-book-bg"]
 title = "Book backgrounds"
@@ -3931,7 +3932,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:753"]
 commands = []
-# no background controls
+note = "no background controls"
 
 [verdict."lrc-book-views"]
 title = "Book views"
@@ -3939,7 +3940,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:754"]
 commands = []
-# no book views
+note = "no book views"
 
 [verdict."lrc-book-export"]
 title = "Book export (PDF/JPEG)"
@@ -3947,7 +3948,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:755"]
 commands = []
-# no book export
+note = "no book export"
 
 [verdict."lrc-ss-templates"]
 title = "Slideshow templates"
@@ -3955,7 +3956,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:413", "crates/engine/src/cmd/slideshow.rs:226", "crates/engine/src/cmd/slideshow.rs:422"]
 commands = ["slideshow.templates.list", "slideshow.templates.apply", "slideshow.templates.save", "slideshow.templates.update", "slideshow.templates.rename", "slideshow.templates.delete", "slideshow.templates.import", "slideshow.templates.export", "slideshow.preview"]
-# missing: no module-panel browser, template folders, saving with a collection, browser thumbnails
+note = "missing: no module-panel browser, template folders, saving with a collection, browser thumbnails"
 
 [verdict."lrc-ss-options"]
 title = "Slideshow options"
@@ -3970,7 +3971,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:386", "crates/engine/src/cmd/slideshow.rs:37", "crates/engine/src/cmd/slideshow.rs:485"]
 commands = ["slideshow.layout", "slideshow.preview"]
-# missing: no slide editor; guides can't be dragged to set the margins
+note = "missing: no slide editor; guides can't be dragged to set the margins"
 
 [verdict."lrc-ss-overlays"]
 title = "Slideshow overlays"
@@ -3978,7 +3979,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:395", "crates/engine/src/cmd/slideshow.rs:49", "crates/engine/src/cmd/slideshow.rs:485"]
 commands = ["slideshow.overlays", "slideshow.preview"]
-# missing: no on-slide dragging; Inter SemiBold only; no styled multi-run identity plate
+note = "missing: no on-slide dragging; Inter SemiBold only; no styled multi-run identity plate"
 
 [verdict."lrc-ss-backdrop"]
 title = "Slideshow backdrop"
@@ -3993,7 +3994,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:404", "crates/engine/src/cmd/slideshow.rs:63", "crates/engine/src/cmd/slideshow.rs:485"]
 commands = ["slideshow.titles", "slideshow.preview"]
-# missing: Classic's Repeat behaviour unverified; Inter SemiBold only; settings live in Settings ▸ Slideshow
+note = "missing: Classic's Repeat behaviour unverified; Inter SemiBold only; settings live in Settings ▸ Slideshow"
 
 [verdict."lrc-ss-music"]
 title = "Slideshow music"
@@ -4001,7 +4002,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:762"]
 commands = []
-# no slideshow music
+note = "no slideshow music"
 
 [verdict."lrc-ss-playback"]
 title = "Slideshow playback"
@@ -4009,7 +4010,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:377", "crates/engine/src/cmd/slideshow.rs:25", "crates/ui-egui/src/menus/ui_commands.rs:187"]
 commands = ["slideshow.playback", "view.slideshowOptions", "slideshow.togglePause", "slideshow.next", "slideshow.previous", "slideshow.end"]
-# missing: no Slideshow module view, music, pan & zoom, or screen choice
+note = "missing: no Slideshow module view, music, pan & zoom, or screen choice"
 
 [verdict."lrc-ss-export"]
 title = "Slideshow export"
@@ -4017,7 +4018,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/slideshow.rs:494", "crates/engine/src/cmd/slideshow.rs:313", "crates/engine/src/cmd/slideshow.rs:503"]
 commands = ["slideshow.export", "slideshow.exportStatus", "dialog.slideshowExport", "app.slideshowExport"]
-# missing: H.264 (Classic's codec)
+note = "missing: H.264 (Classic's codec)"
 
 [verdict."lrc-print-layoutstyle"]
 title = "Print layout styles"
@@ -4039,7 +4040,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/print.rs:388", "crates/engine/src/cmd/print.rs:70", "crates/engine/src/cmd/print.rs:402"]
 commands = ["print.set", "print.layout.autoLayout", "print.layout.newPage", "print.layout.clear", "app.print", "export.contactSheet"]
-# missing: no printer-driver Page Setup, no cell size / alignment presets
+note = "missing: no printer-driver Page Setup, no cell size / alignment presets"
 
 [verdict."lrc-print-guides"]
 title = "Print guides"
@@ -4061,7 +4062,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/print.rs:388", "crates/engine/src/cmd/print.rs:70", "crates/engine/src/cmd/export.rs:199"]
 commands = ["print.set", "export.contactSheet"]
-# missing: no identity plate, watermark, photo info or package Cut Guides
+note = "missing: no identity plate, watermark, photo info or package Cut Guides"
 
 [verdict."lrc-print-job"]
 title = "Print job & colour management"
@@ -4069,7 +4070,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/print.rs:388", "crates/engine/src/cmd/print.rs:70", "crates/engine/src/cmd/print.rs:405"]
 commands = ["print.set", "print.exportPdf", "export.contactSheet"]
-# missing: no printing to a printer, no JPEG file output, no Draft Mode
+note = "missing: no printing to a printer, no JPEG file output, no Draft Mode"
 
 [verdict."lrc-print-templates"]
 title = "Print templates"
@@ -4077,7 +4078,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/print.rs:409", "crates/engine/src/cmd/print.rs:290", "crates/engine/src/cmd/print.rs:412"]
 commands = ["print.template.save", "print.template.apply", "print.template.list", "print.template.delete", "print.template.export", "print.template.import"]
-# missing: no built-in templates, no folders
+note = "missing: no built-in templates, no folders"
 
 [verdict."lrc-web-layout"]
 title = "Web gallery layouts"
@@ -4085,7 +4086,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:773"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-siteinfo"]
 title = "Web gallery site info"
@@ -4093,7 +4094,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:774"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-color"]
 title = "Web gallery colours"
@@ -4101,7 +4102,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:775"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-appearance"]
 title = "Web gallery appearance"
@@ -4109,7 +4110,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:776"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-imageinfo"]
 title = "Web gallery image info"
@@ -4117,7 +4118,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:777"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-output"]
 title = "Web gallery output"
@@ -4125,7 +4126,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:778"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."lrc-web-upload"]
 title = "Web gallery upload"
@@ -4133,7 +4134,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:779"]
 commands = []
-# out of scope for a desktop app
+note = "out of scope for a desktop app"
 
 [verdict."keyc-panels"]
 title = "Classic panel keys (Tab, ⇧Tab, T, F5–F8, solo)"
@@ -4141,7 +4142,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:83", "crates/ui-egui/src/menus/run.rs:590", "crates/ui-egui/src/menus/ui_commands.rs:84"]
 commands = ["view.filmstrip", "view.leftPanel", "view.rightPanel"]
-# missing: Tab / ⇧Tab and F5 / T are not bound
+note = "missing: Tab / ⇧Tab and F5 / T are not bound"
 
 [verdict."keyc-modules"]
 title = "Classic module switching (⌘⌥1–7)"
@@ -4149,7 +4150,7 @@ verdict = "NA"
 level = "read"
 evidence = ["docs/parity-checklist.md:781"]
 commands = []
-# no modules in LightCraft
+note = "no modules in LightCraft"
 
 [verdict."keyc-views"]
 title = "Classic view keys (E, G, C, N, L, F, I, ⇧R, ⌘⌥0)"
@@ -4157,7 +4158,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:63", "crates/ui-egui/src/menus/run.rs:198", "crates/ui-egui/src/menus/ui_commands.rs:92"]
 commands = ["view.photoGrid", "view.zoom100"]
-# missing: ours: E opens Edit (not the loupe); no compare / survey / lights-out modes
+note = "missing: ours: E opens Edit (not the loupe); no compare / survey / lights-out modes"
 
 [verdict."keyc-secondwindow"]
 title = "Classic secondary-window keys"
@@ -4165,7 +4166,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:783"]
 commands = []
-# no second window command
+note = "no second window command"
 
 [verdict."keyc-catalog"]
 title = "Classic photo/catalog keys (⇧⌘I, ⌘', ⌘R, F2, ⌫, ⇧⌘E…)"
@@ -4180,7 +4181,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:93", "crates/ui-egui/src/menus/run.rs:658", "crates/ui-egui/src/menus/ui_commands.rs:100"]
 commands = ["view.zoomToggle", "view.thumbSizeUp", "view.thumbSizeDown", "library.select"]
-# missing: no compare or stacks keys; = / - and Home / End work in grids only
+note = "missing: no compare or stacks keys; = / - and Home / End work in grids only"
 
 [verdict."keyc-rating"]
 title = "Classic rating/flag keys (1–5, ⇧1–5, 6–9, P, X, U, ⇧X, ⇧U, `[` `]`, \\`, ⌘↑ ⌘↓)"
@@ -4188,7 +4189,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/library/specs.rs:454", "crates/engine/src/cmd/library/specs.rs:535"]
 commands = ["photo.rate", "photo.pick", "photo.flag", "photo.cycleFlag", "photo.increaseFlag", "photo.decreaseFlag", "library.toggleFilters"]
-# missing: Shift+P outside grids opens Presets here
+note = "missing: Shift+P outside grids opens Presets here"
 
 [verdict."keyc-collections"]
 title = "Classic collection keys (⌘N, B…)"
@@ -4196,7 +4197,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:179", "crates/ui-egui/src/menus/run.rs:1117"]
 commands = ["dialog.newAlbum"]
-# missing: no quick collection
+note = "missing: no quick collection"
 
 [verdict."keyc-metadata"]
 title = "Classic keyword/metadata keys (⌘K, ⌘S, ⌘⌥⇧C/V…)"
@@ -4204,7 +4205,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/xmp.rs:84", "crates/engine/src/cmd/xmp.rs:10", "crates/engine/src/cmd/library/specs.rs:385"]
 commands = ["photo.saveMetadataToFile", "photo.copyMetadata", "photo.pasteMetadata", "panel.addKeywords", "panel.editKeywords", "dialog.keywordShortcut", "keyword.setShortcut", "keyword.toggleShortcut", "keyword.toggleFromSet", "keyword.nextSet", "keyword.previousSet", "tool.enablePainting"]
-# missing: ⌘⌥⇧F Visual Search, ⇧O Edit Face name and the macOS ⌘: / ⌘; bindings
+note = "missing: ⌘⌥⇧F Visual Search, ⇧O Edit Face name and the macOS ⌘: / ⌘; bindings"
 
 [verdict."keyc-develop"]
 title = "Classic develop keys (V, ⌘U, ⇧⌘U, R, Q, K, M, ⇧M, ⇧W, ⇧J, ⇧Q…)"
@@ -4212,7 +4213,7 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/develop.rs:777", "crates/engine/src/cmd/develop.rs:395"]
 commands = ["develop.treatment", "develop.reset", "crop.reset"]
-# missing: R / K / M / ⇧M bindings differ; no Classic keymap layer
+note = "missing: R / K / M / ⇧M bindings differ; no Classic keymap layer"
 
 [verdict."keyc-module-output"]
 title = "Book / slideshow / print / map / web keys"
@@ -4220,7 +4221,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["docs/parity-checklist.md:790"]
 commands = []
-# modules not implemented
+note = "modules not implemented"
 
 [verdict."keyc-help"]
 title = "Classic help keys (⌘/, F1)"
@@ -4228,4 +4229,4 @@ verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/ui-egui/src/menus/ui_commands.rs:274", "crates/ui-egui/src/menus/run.rs:1309"]
 commands = ["app.shortcuts"]
-# missing: ⌘/ only
+note = "missing: ⌘/ only"
