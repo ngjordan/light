@@ -6,4 +6,4 @@
 
 **Catalogue coverage:** 10 (76.9 %) of 13 rows are works or partial; 7 (53.8 %) works outright; **0 (0.0 %) unaudited**.
 
-Catalogue rows: 13. Verdicts recorded: 13. Registry ids: 190.
+Catalogue rows: 13. Verdicts recorded: 13. Registry ids: 443.
