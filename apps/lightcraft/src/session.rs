@@ -1,5 +1,6 @@
 #[cfg(any(target_os = "freebsd", target_os = "linux"))]
 use super::platform::DIALOG_PARENT;
+#[cfg(not(target_arch = "wasm32"))]
 use super::platform::{explorer_select_command, file_dialog, windows_open_url_command};
 use super::prefs::display_profile_dir;
 use super::*;
@@ -21,6 +22,13 @@ pub(crate) fn services(cc: &eframe::CreationContext<'_>, log_file: Option<&std::
 
 /// Platform services available without a native window handle. Without that handle Windows
 /// uses the explicit display profile / sRGB instead of automatic monitor-profile detection.
+#[cfg(target_arch = "wasm32")]
+pub(crate) fn services_for_host(_ctx: &egui::Context, _log_file: Option<&std::path::Path>) -> Services {
+    // The native file dialogs, atomic file writes and system theme are not available in a browser tab; the web host sets its own.
+    Services::default()
+}
+
+#[cfg(not(target_arch = "wasm32"))]
 pub(crate) fn services_for_host(ctx: &egui::Context, log_file: Option<&std::path::Path>) -> Services {
     let ctx = ctx.clone();
     Services {
@@ -279,7 +287,10 @@ pub(crate) fn open_session(in_memory: bool, launch: &Launch, seed_demo: bool) ->
     s.face_models_dir = lightcraft_engine::config::default_face_models_dir();
     s.slide_templates_dir = lightcraft_engine::config::config_dir().map(|d| d.join(lightcraft_engine::slide_template::DIR_NAME));
     // Control requests are answered on the UI thread: Add to Apple Photos must not wait there
-    s.apple_photos_background = true;
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        s.apple_photos_background = true;
+    }
     (s, problem)
 }
 

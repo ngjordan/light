@@ -10,21 +10,23 @@ publish = false
 workspace = true
 
 [features]
-default = ["denoise"]
-denoise = ["lightcraft-engine/denoise"]
-rawnind-model = ["denoise", "lightcraft-engine/rawnind-model"]
+rawnind-model = ["lightcraft-engine/rawnind-model"]
 heif = ["lightcraft-codecs/heif"]
 
 [dependencies]
-lightcraft-engine = { workspace = true, features = ["sam"] }
+lightcraft-engine.workspace = true
 lightcraft-ui-egui.workspace = true
 lightcraft-codecs.workspace = true
 lightcraft-raster.workspace = true
 egui.workspace = true
-eframe = { workspace = true, features = ["glow", "x11", "wayland"] }
+eframe = { workspace = true, features = ["x11", "wayland"] }
 rfd.workspace = true
 serde_json.workspace = true
 log.workspace = true
+
+# The SAM 3 models and the GPU denoiser need native threads, a network stack and a native GPU; a browser tab has none.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+lightcraft-engine = { workspace = true, features = ["sam", "denoise"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 zbus.workspace = true

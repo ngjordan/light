@@ -14,6 +14,7 @@ mod appearance;
 #[cfg(target_os = "linux")]
 #[path = "../../../apps/lightcraft/src/colord.rs"]
 mod colord;
+#[cfg(not(target_arch = "wasm32"))]
 #[path = "../../../apps/lightcraft/src/dialog_filter.rs"]
 mod dialog_filter;
 #[path = "../../../apps/lightcraft/src/editors.rs"]
@@ -21,6 +22,7 @@ mod editors;
 #[cfg(target_os = "macos")]
 #[path = "../../../apps/lightcraft/src/native_menu.rs"]
 mod native_menu;
+#[cfg(not(target_arch = "wasm32"))]
 #[path = "../../../apps/lightcraft/src/platform.rs"]
 mod platform;
 #[allow(dead_code)] // standalone window-placement helper is not needed by a hosted module
@@ -37,6 +39,7 @@ mod session;
 #[cfg(windows)]
 #[path = "../../../apps/lightcraft/src/win_screen_profile.rs"]
 mod win_screen_profile;
+#[cfg(not(target_arch = "wasm32"))]
 use dialog_filter::FileDialogExt as _;
 
 /// How long the process waits for the GPU work in flight before it ends anyway.
