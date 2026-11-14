@@ -12,8 +12,8 @@ from [docs/gaps.md](docs/gaps.md). The full assessment, method and evidence are 
 
 | | Value | Kind |
 |---|---:|---|
-| **Feature breadth** (checklist) | **81.6%** of 532 rows (P0 98.0%, P1 95.2%, P2 50.0%) | measured: [parity-checklist.md](docs/parity-checklist.md) recount |
-| **Feature breadth** (weighted by use) | **~77%** | estimated |
+| **Feature breadth** (checklist) |**[parity/parity.md](parity/parity.md)**| measured: [parity-checklist.md](docs/parity-checklist.md) recount |
+| **Feature breadth** (weighted by use) |**[parity/parity.md](parity/parity.md)**| estimated |
 | **Ready for real work** (full target) | **~62%** (57–67%) | estimated: weighted sum over the dimensions |
 | **Mainstream practitioner** | **~51%** (46–56%) | estimated |
 | **Essentials user** | **~65%** (60–70%) | estimated |
