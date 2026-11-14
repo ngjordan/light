@@ -2233,11 +2233,11 @@ commands = ["app.settings"]
 
 [verdict."menu-app-updates"]
 title = "Check for updates"
-verdict = "ABSENT"
+verdict = "REAL"
 level = "read"
-evidence = ["apps/lightcraft/src/native_menu.rs:463", "crates/ui-egui/src/menus/ui_commands.rs:261"]
+evidence = ["crates/ui-egui/src/menus/ui_commands.rs:261", "crates/ui-egui/src/dialogs/updates_ui.rs:77"]
 commands = []
-note = "no Updates command The macOS app menu is assembled in apps/lightcraft/src/native_menu.rs:463 from About, Settings, Services, Hide, Hide Others, Show All and Quit — no Check for Updates entry; the update check itself is a Help-menu command (crates/ui-egui/src/menus/ui_commands.rs:261)."
+note = "The Help menu carries app.checkForUpdates (ui_commands.rs:261), it runs the updater and reports the result in a dialog (updates_ui.rs:77, check requests the check and tick calls the updater). The earlier note said there was no Updates command while citing the command it is registered in. The macOS app menu has no entry (apps/lightcraft/src/native_menu.rs:463), but the command is in the Help menu."
 
 [verdict."menu-app-sync"]
 title = "Sync status / pause"
@@ -2629,7 +2629,7 @@ verdict = "ABSENT"
 level = "read"
 evidence = ["apps/lightcraft/src/hdr_display.rs:99", "crates/ui-egui/src/menus/menubar.rs:226"]
 commands = []
-note = "no HDR display output (see LR-VIEW-HDR-DISPLAY). ui_commands.rs:104 is the View menu entry list, where the only HDR item is "Visualize HDR" and there is no HDR display option. The View menu holds only view.visualizeHdr (crates/ui-egui/src/menus/menubar.rs:226), and the display output choice (apps/lightcraft/src/hdr_display.rs:99) always falls back to SDR, so there is no HDR output mode to pick."
+note = "no HDR display output (see LR-VIEW-HDR-DISPLAY). ui_commands.rs:104 is the View menu entry list, where the only HDR item is 'Visualize HDR' and there is no HDR display option. The View menu holds only view.visualizeHdr (crates/ui-egui/src/menus/menubar.rs:226), and the display output choice (apps/lightcraft/src/hdr_display.rs:99) always falls back to SDR, so there is no HDR output mode to pick."
 
 [verdict."menu-photo-addtoalbum"]
 title = "Add to album"
