@@ -81,11 +81,11 @@ commands = ["library.browse", "photo.addToLibrary", "library.import", "local.add
 
 [verdict."lr-imp-sidecar-split"]
 title = "Separate XMP sidecar variants"
-verdict = "ABSENT"
+verdict = "PARTIAL"
 level = "read"
 evidence = ["crates/engine/src/cmd/xmp.rs:73", "crates/engine/src/cmd/xmp.rs:102"]
 commands = ["library.xmpPreferences"]
-# library.xmpPreferences handles sidecar naming (stem|full) only; no split sidecars
+note = "library.xmpPreferences is a real preferences command and sets the sidecar naming (stem or full) and autoWrite, so it does the naming half of the feature; there is no way to split sidecar variants, which is the half that is missing"
 
 [verdict."lr-imp-formats"]
 title = "Supported formats"
