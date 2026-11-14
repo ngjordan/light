@@ -179,9 +179,9 @@ commands = ["album.createSmart", "album.setRules", "library.holdView", "library.
 title = "Shared albums"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:101"]
+evidence = ["crates/engine/src/cmd/library/specs.rs:798", "crates/engine/src/cmd/library/specs.rs:1297"]
 commands = []
-note = "needs a sharing service; none exists"
+note = "needs a sharing service; none exists. library/specs.rs defines the album.* commands from album.create (line 798) to album.addPhotos (line 1050), and none of them shares, publishes or syncs an album The album command group begins at album.create (crates/engine/src/cmd/library/specs.rs:798) and its last entry is album.setCover (crates/engine/src/cmd/library/specs.rs:1297) — create, rename, delete, move, reorder, sort, add, remove, target and cover, with no sharing or publish command."
 
 [verdict."lr-lib-offline"]
 title = "Keep album offline"
@@ -466,9 +466,9 @@ commands = ["library.filter"]
 title = "Natural-language search"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:151"]
+evidence = ["crates/engine/src/cmd/library/specs.rs:86", "crates/catalog/src/query.rs:21"]
 commands = []
-note = "no natural-language / AI search exists"
+note = "no natural-language / AI search exists. library/specs.rs:86 library.filter takes only structured fields (text, rating, flag, label, keyword, person, camera ...), with no natural-language or AI query The library.filter spec (crates/engine/src/cmd/library/specs.rs:86) takes fielded text tokens plus rating, flag, label, kind, date, keyword, person and camera, and the Filter struct (crates/catalog/src/query.rs:21) has no natural-language or embedding query field."
 
 [verdict."lr-filt-rating"]
 title = "Rating filter"
@@ -982,17 +982,17 @@ commands = []
 title = "Adaptive profiles"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:239"]
+evidence = ["crates/engine/src/presets.rs:522", "crates/pipeline/src/profiles.rs:221"]
 commands = []
-note = "no adaptive presets"
+note = "no adaptive presets. presets.rs builtin() (line 261) and the PROFILES table (line 522) hold fixed settings and looks only, with no adaptive entry The built-in profile list (crates/engine/src/presets.rs:522) and the implemented look ids (crates/pipeline/src/profiles.rs:221) hold the own looks only — there is no adaptive entry."
 
 [verdict."lr-prof-camera"]
 title = "Camera-matching looks"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:240"]
+evidence = ["crates/engine/src/presets.rs:522", "crates/engine/src/cmd/dcp_profiles.rs:194"]
 commands = []
-note = "no camera-matching looks"
+note = "no camera-matching looks. The built-in PROFILES table (presets.rs:522) has only Basic, B&W, Film, Cinematic and Muted groups, and develop.profile (develop.rs:784) picks from that list or imported files, so there is no built-in camera-matching group The built-in profile list (crates/engine/src/presets.rs:522) names no camera-matched look; the camera profiles Light knows are only user-imported .dcp files (crates/engine/src/cmd/dcp_profiles.rs:194)."
 
 [verdict."lr-prof-cameracolor"]
 title = "Camera colour calibration (own)"
@@ -1013,9 +1013,9 @@ commands = ["develop.profile"]
 title = "Legacy profiles"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:243"]
+evidence = ["crates/engine/src/presets.rs:522", "crates/pipeline/src/profiles.rs:221"]
 commands = []
-note = "no legacy profiles"
+note = "no legacy profiles. The built-in PROFILES table (presets.rs:522-545) has no legacy profile group The built-in profile list (crates/engine/src/presets.rs:522) and the implemented look ids (crates/pipeline/src/profiles.rs:221) have no legacy entry."
 
 [verdict."lr-prof-nonraw"]
 title = "Profiles for non-raw files"
@@ -1158,9 +1158,9 @@ note = "out of scope for a desktop app"
 title = "Object detection for remove"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:273"]
+evidence = ["crates/engine/src/cmd/masks.rs:816", "crates/engine/src/cmd/masks.rs:852"]
 commands = []
-note = "no object detection for remove"
+note = "no object detection for remove. The Remove-tool commands in masks.rs (spot.findDust at 816, spot.findBlemishes at 852) detect only dust and face blemishes, and no command detects objects for removal In the Remove tool only spot.findDust (crates/engine/src/cmd/masks.rs:816) and spot.findBlemishes (crates/engine/src/cmd/masks.rs:852) detect anything — no object-detection command exists."
 
 [verdict."lr-rem-brush-params"]
 title = "Brush size / feather / opacity"
@@ -1195,9 +1195,9 @@ note = "out of scope for a desktop app"
 title = "Remove reflections"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:278"]
+evidence = ["crates/engine/src/cmd/masks.rs:913", "crates/engine/src/cmd/masks.rs:816"]
 commands = []
-note = "no reflection detection"
+note = "no reflection detection. The Remove-tool commands in masks.rs run from spot.findDust (816) to spot.add (909), and none detects or removes reflections The Remove spot modes are remove, heal, clone and fill (crates/engine/src/cmd/masks.rs:913) and the only automatic detection is dust (crates/engine/src/cmd/masks.rs:816) — there is no reflection removal."
 
 [verdict."lr-rem-dust"]
 title = "Dust detection"
@@ -1400,9 +1400,9 @@ commands = ["view.maskPins", "view.toolOverlay"]
 title = "Recompute AI masks"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:316"]
+evidence = ["crates/engine/src/cmd/masks.rs:405", "crates/engine/src/cmd/masks.rs:95"]
 commands = []
-note = "no automatic AI-mask recomputation"
+note = "no automatic AI-mask recomputation. The mask commands in masks.rs (mask.refine at 638, mask.duplicate at 720) include no command that recomputes an AI mask after the photo changes mask.update (crates/engine/src/cmd/masks.rs:405) replaces a shape but never re-runs the model, and resolve_ai (crates/engine/src/cmd/masks.rs:95) segments only when a new shape is added."
 
 [verdict."lr-mask-sync"]
 title = "Copy masks to other photos"
@@ -1415,9 +1415,9 @@ commands = ["develop.copy"]
 title = "Adaptive presets"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:318"]
+evidence = ["crates/engine/src/cmd/mask_effects.rs:594", "crates/engine/src/presets.rs:261"]
 commands = []
-note = "no adaptive presets"
+note = "no adaptive presets. mask_effects.rs defines applyEffect (604) and saveEffect (613) for fixed saved effects, and none is adaptive to the photo's content Mask effect presets are listed by mask.effects (crates/engine/src/cmd/mask_effects.rs:594) and the built-in preset list (crates/engine/src/presets.rs:261) — none of them adapts to the image."
 
 [verdict."lr-pre-panel"]
 title = "Presets panel"
@@ -1451,9 +1451,9 @@ commands = ["preset.apply"]
 title = "Adaptive presets"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:328"]
+evidence = ["crates/engine/src/presets.rs:261", "crates/engine/src/cmd/develop.rs:1320"]
 commands = []
-note = "no adaptive presets"
+note = "no adaptive presets. presets.rs builtin() (line 261) lists only fixed-settings presets, with no adaptive preset Presets are fixed settings blobs: the built-in list (crates/engine/src/presets.rs:261) and preset.apply (crates/engine/src/cmd/develop.rs:1320) apply a named preset verbatim, with nothing adapting it to the photo."
 
 [verdict."lr-pre-premium"]
 title = "Built-in presets (own)"
@@ -1580,17 +1580,17 @@ commands = ["merge.hdrLast", "merge.panoramaLast", "merge.hdrPanoramaLast", "mer
 title = "Enhance dialog"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:366"]
+evidence = ["crates/ui-egui/src/state/dialog.rs:28", "crates/develop/src/settings.rs:1448"]
 commands = []
-note = "no Enhance dialog"
+note = "no Enhance dialog. denoise.rs registers only the denoise.* commands (models at 658, denoise.toggle at 669), and there is no enhance dialog command The app's dialog list (crates/ui-egui/src/state/dialog.rs:28) has no Enhance variant, and the Enhance settings struct (crates/develop/src/settings.rs:1448) holds only denoise, raw_details and super_resolution."
 
 [verdict."lr-enh-inplace"]
 title = "In-place enhance"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:367"]
+evidence = ["crates/develop/src/controls.rs:260", "crates/develop/src/settings.rs:1453"]
 commands = []
-note = "no in-place enhance"
+note = "no in-place enhance. denoise.toggle (denoise.rs:669) only sets the develop denoise amount and no command writes an enhanced copy or replaces the file The only enhance control is the Detail-section denoise amount slider (crates/develop/src/controls.rs:260); the super_resolution flag (crates/develop/src/settings.rs:1453) is never written by any command or panel."
 
 [verdict."lr-hdr-edit"]
 title = "HDR editing"
@@ -1642,33 +1642,33 @@ note = "videos can be catalogued (kind, duration); no player"
 title = "Trim"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:384"]
+evidence = ["crates/engine/src/cmd.rs:143", "crates/catalog/src/model.rs:46"]
 commands = []
-note = "no video trimming"
+note = "no video trimming. The codecs Format enum (sniff.rs:8) lists only still-image formats, so there is no video to trim The engine command registry (crates/engine/src/cmd.rs:143) has no video command area, and a video is only a catalogued kind (crates/catalog/src/model.rs:46) — nothing trims it."
 
 [verdict."lr-vid-edit"]
 title = "Edits on video"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:385"]
+evidence = ["crates/engine/src/cmd/develop.rs:294", "crates/catalog/src/model.rs:519"]
 commands = []
-note = "no video editing"
+note = "no video editing. The codecs Format enum (sniff.rs:8) has no video format, so develop.set (develop.rs:297) never applies to video The develop command table (crates/engine/src/cmd/develop.rs:294) edits still photos, while is_video (crates/catalog/src/model.rs:519) only marks a clip as a video — no edit applies to one."
 
 [verdict."lr-vid-cover"]
 title = "Cover frame"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:386"]
+evidence = ["crates/engine/src/export/options.rs:5", "crates/catalog/src/model.rs:46"]
 commands = []
-note = "no video cover frame"
+note = "no video cover frame. The codecs Format enum (sniff.rs:8) has no video format, so there is no video frame to pick as a cover The export formats (crates/engine/src/export/options.rs:5) are still images, original and DNG only; a video (crates/catalog/src/model.rs:46) has no poster frame to export."
 
 [verdict."lr-vid-export"]
 title = "Video export"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:387"]
+evidence = ["crates/engine/src/cmd/export.rs:196", "crates/engine/src/export/options.rs:5"]
 commands = []
-note = "no video export"
+note = "no video export. The export Format parser (export/options.rs:26) accepts only still-image formats, with no video format The export command table (crates/engine/src/cmd/export.rs:196) and the export formats (crates/engine/src/export/options.rs:5) cover stills only; the AV1 writer belongs to the slideshow exporter, not to exporting a catalogued video."
 
 [verdict."lr-vid-photo2video"]
 title = "Photo to video (generative)"
@@ -1860,9 +1860,9 @@ note = "missing: no map in the panel (Show on Map opens OpenStreetMap in the bro
 title = "Map module [Classic]"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:428"]
+evidence = ["crates/engine/src/cmd.rs:143", "crates/engine/src/cmd/geocode.rs:311"]
 commands = []
-note = "no Map module"
+note = "no Map module. docking.rs:14 lists the panel registry (Canvas, Library, Tools, Presets) and view.rs:5 the view modes, and neither has a Map entry. The engine command registry (crates/engine/src/cmd.rs:143) has no map area; the only geolocation commands are reverse-geocode and place names (crates/engine/src/cmd/geocode.rs:311)."
 
 [verdict."lr-pref-general"]
 title = "General settings"
@@ -1934,9 +1934,9 @@ commands = ["app.setShortcut", "app.resetShortcuts"]
 title = "Early-access toggles"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:443"]
+evidence = ["crates/ui-egui/src/dialogs/settings.rs:49", "crates/engine/src/cmd/prefs.rs:108"]
 commands = []
-note = "no early-access toggles"
+note = "no early-access toggles. settings.rs:49 is the Settings tab table (General through AI Denoise) and has no early-access or tech-preview tab. The Settings tabs (crates/ui-egui/src/dialogs/settings.rs:49) are general, import, performance, display, interface, slideshow, faces and AI denoise, and library.preferences (crates/engine/src/cmd/prefs.rs:108) carries no early-access toggle."
 
 [verdict."lr-pref-notifications"]
 title = "Notifications"
@@ -1950,9 +1950,9 @@ note = "out of scope for a desktop app"
 title = "Device settings"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:445"]
+evidence = ["crates/ui-egui/src/dialogs/settings.rs:49", "crates/engine/src/cmd/library/specs.rs:382"]
 commands = []
-note = "no device settings"
+note = "no device settings The Settings tabs (crates/ui-egui/src/dialogs/settings.rs:49) have no device page, and library.devices (crates/engine/src/cmd/library/specs.rs:382) only lists mounted cameras and cards for import."
 
 [verdict."lr-cloud-sync"]
 title = "Cloud sync"
@@ -1973,9 +1973,9 @@ commands = ["library.smartPreviews", "library.smartPreviewsLocation", "photo.sma
 title = "AI-settings update indicator"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:453"]
+evidence = ["crates/engine/src/cmd/denoise.rs:658", "crates/ui-egui/src/panels/denoise.rs:239"]
 commands = []
-note = "no AI model update indicator"
+note = "no AI model update indicator. settings.rs:49 is the Settings tab table, whose only AI entry is the AI Denoise tab, and it has no model update indicator. The AI model list (crates/engine/src/cmd/denoise.rs:658) reports each model's version and licence, and the AI Denoise settings tab (crates/ui-egui/src/panels/denoise.rs:239) shows no update-available indicator."
 
 [verdict."lr-ai-credits"]
 title = "Generative credits"
@@ -2198,9 +2198,9 @@ commands = ["app.whatsNew"]
 title = "Early-access badges"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:489"]
+evidence = ["crates/ui-egui/src/state/settings.rs:29", "crates/ui-egui/src/theme.rs:15"]
 commands = []
-note = "no Early Access AI features"
+note = "no Early Access AI features. settings.rs:49 is the Settings tab table and has no early-access AI settings or badges. The only badges are the rating, flag and edited marks (crates/ui-egui/src/state/settings.rs:29) drawn with the shared colour-label palette (crates/ui-egui/src/theme.rs:15); nothing marks an early-access feature."
 
 [verdict."lr-behav-titlebar"]
 title = "Title bar drag and double-click zoom (macOS)"
@@ -2235,9 +2235,9 @@ commands = ["app.settings"]
 title = "Check for updates"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:502"]
+evidence = ["apps/lightcraft/src/native_menu.rs:463", "crates/ui-egui/src/menus/ui_commands.rs:261"]
 commands = []
-note = "no Updates command"
+note = "no Updates command The macOS app menu is assembled in apps/lightcraft/src/native_menu.rs:463 from About, Settings, Services, Hide, Hide Others, Show All and Quit — no Check for Updates entry; the update check itself is a Help-menu command (crates/ui-egui/src/menus/ui_commands.rs:261)."
 
 [verdict."menu-app-sync"]
 title = "Sync status / pause"
@@ -2627,9 +2627,9 @@ commands = ["view.sidebarSection", "view.sidebarReset"]
 title = "HDR display options"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:557"]
+evidence = ["apps/lightcraft/src/hdr_display.rs:99", "crates/ui-egui/src/menus/menubar.rs:226"]
 commands = []
-note = "no HDR display output (see LR-VIEW-HDR-DISPLAY)"
+note = "no HDR display output (see LR-VIEW-HDR-DISPLAY). ui_commands.rs:104 is the View menu entry list, where the only HDR item is "Visualize HDR" and there is no HDR display option. The View menu holds only view.visualizeHdr (crates/ui-egui/src/menus/menubar.rs:226), and the display output choice (apps/lightcraft/src/hdr_display.rs:99) always falls back to SDR, so there is no HDR output mode to pick."
 
 [verdict."menu-photo-addtoalbum"]
 title = "Add to album"
@@ -2705,9 +2705,9 @@ commands = ["dialog.mergeHdr", "dialog.mergePanorama", "dialog.mergeHdrPanorama"
 title = "Enhance…"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:568"]
+evidence = ["crates/ui-egui/src/menus/menubar.rs:251", "crates/ui-egui/src/state/dialog.rs:28"]
 commands = []
-note = "no Enhance command"
+note = "no Enhance command. ui_commands.rs:283-284 are the Photo menu entries (Edit Capture Time, Auto-Tag from Tracklog) and no Enhance command is declared beside them. The Photo menu (crates/ui-egui/src/menus/menubar.rs:251) lists develop.auto, develop.treatment, develop.reset and dialog.createPreset but no Enhance item, and the dialog list (crates/ui-egui/src/state/dialog.rs:28) has no Enhance variant."
 
 [verdict."menu-photo-auto"]
 title = "Auto settings"
@@ -2734,9 +2734,9 @@ commands = ["develop.reset", "crop.reset"]
 title = "Update AI settings"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:572"]
+evidence = ["crates/ui-egui/src/menus/menubar.rs:251", "crates/engine/src/cmd/denoise.rs:658"]
 commands = []
-note = "no Update AI Info command"
+note = "no Update AI Info command. ui_commands.rs:283-284 are the Photo menu entries and no Update AI Settings command is declared beside them. The Photo menu (crates/ui-egui/src/menus/menubar.rs:251) has no update-AI item; the AI models are managed from the denoise command group (crates/engine/src/cmd/denoise.rs:658) instead."
 
 [verdict."menu-photo-rename"]
 title = "Rename N photos…"
@@ -3386,9 +3386,9 @@ note = "out of scope for a desktop app"
 title = "Detect objects — ⌥⇧O"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:672"]
+evidence = ["crates/ui-egui/src/shortcuts.rs:214", "crates/ui-egui/src/menus/ui_commands.rs:110"]
 commands = []
-note = "no object detection"
+note = "no object detection. shortcuts.rs:30 builds the bindable keybinding table from the UI and engine commands and ui_commands.rs:197 shows the Photo shortcuts, with no Detect command or Alt+Shift+O binding. No Alt+Shift+O binding exists: the extra Classic keys live in the ALIASES table (crates/ui-egui/src/shortcuts.rs:214), and Shift+O is taken by view.maskOverlayAll (crates/ui-egui/src/menus/ui_commands.rs:110)."
 
 [verdict."key-crop-constrain"]
 title = "Lock crop aspect — A"
@@ -3471,9 +3471,9 @@ commands = ["app.help"]
 title = "Play/pause video — Space"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:684"]
+evidence = ["crates/ui-egui/src/shortcuts.rs:218", "crates/catalog/src/model.rs:519"]
 commands = []
-note = "no video playback"
+note = "no video playback. shortcuts.rs:30 builds the bindable keybinding table from the UI and engine commands and ui_commands.rs:63 starts the View entries, with no video play/pause command. Space is bound to view.zoomToggle in the ALIASES table (crates/ui-egui/src/shortcuts.rs:218), and is_video (crates/catalog/src/model.rs:519) only marks a clip as a video — there is no player to pause."
 
 [verdict."key-esc"]
 title = "Leave tool / view — Esc"
@@ -3522,9 +3522,9 @@ commands = ["library.autoImport"]
 title = "Tethered capture"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:698"]
+evidence = ["crates/engine/src/cmd/library/specs.rs:382", "crates/engine/src/devices.rs:159"]
 commands = []
-note = "no tethered capture"
+note = "no tethered capture. library/specs.rs:32 is specs(), the library command list, and it declares no tethered capture command. library.devices (crates/engine/src/cmd/library/specs.rs:382) and devices (crates/engine/src/devices.rs:159) only find mounted volumes with a DCIM folder for import; no camera session or live capture exists."
 
 [verdict."lrc-lib-views"]
 title = "Grid / loupe / compare / survey / people"
@@ -3616,9 +3616,9 @@ commands = ["album.createSmart", "album.setRules", "album.ruleFields", "dialog.s
 title = "Publish services"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:711"]
+evidence = ["crates/engine/src/cmd.rs:143", "crates/engine/src/cmd/library/specs.rs:1297"]
 commands = []
-note = "no publish services"
+note = "no publish services. library/specs.rs:32 is specs(), the library command list, and it declares no publish service command. The engine command registry (crates/engine/src/cmd.rs:143) has no publish area, and the album commands end at album.setCover (crates/engine/src/cmd/library/specs.rs:1297)."
 
 [verdict."lrc-lib-filterbar"]
 title = "Library filter bar"
@@ -3681,9 +3681,9 @@ note = "missing: no clusters with separators, no persistent reject, no merge of 
 title = "Comments panel"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:720"]
+evidence = ["crates/ui-egui/src/state/view.rs:24", "crates/ui-egui/src/docking.rs:14"]
 commands = []
-note = "no comments"
+note = "no comments. library/specs.rs:32 is specs(), the library command list, and it declares no comments command. The tool panel list (crates/ui-egui/src/state/view.rs:24) has no comments panel, and the dockable panels (crates/ui-egui/src/docking.rs:14) are canvas, library, tools and presets."
 
 [verdict."lrc-lib-visualsearch"]
 title = "Find similar photos"
@@ -3812,9 +3812,9 @@ note = "missing: Grid and Guides overlays, ⌘-drag move/resize, free opacity / 
 title = "Video frame capture"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:738"]
+evidence = ["crates/engine/src/cmd/develop.rs:294", "crates/catalog/src/model.rs:46"]
 commands = []
-note = "no video in Develop"
+note = "no video in Develop. develop.rs:294 is specs(), the develop command list, and it declares no video command. The develop command table (crates/engine/src/cmd/develop.rs:294) edits still photos only, and a video is just a catalogued kind (crates/catalog/src/model.rs:46) — Develop has no video frame."
 
 [verdict."lrc-dev-histogram-drag"]
 title = "Drag on the histogram to adjust tone regions"
@@ -3827,25 +3827,25 @@ commands = ["develop.set", "develop.beginInteraction", "develop.endInteraction"]
 title = "Map view"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:740"]
+evidence = ["crates/ui-egui/src/state/view.rs:5", "crates/ui-egui/src/docking.rs:22"]
 commands = []
-note = "no Map view"
+note = "no Map view. view.rs:5 is the ViewMode enum (PhotoGrid through People) and has no Map view. The view modes (crates/ui-egui/src/state/view.rs:5) are photo grid, square grid, detail, compare, survey, reference and people, and the dockable panels (crates/ui-egui/src/docking.rs:22) add no map panel."
 
 [verdict."lrc-map-geotag"]
 title = "Drag photos onto the map"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:741"]
+evidence = ["crates/engine/src/cmd/library/gps.rs:3", "crates/engine/src/cmd/geocode.rs:312"]
 commands = []
-note = "no GPX geotagging UI in a map"
+note = "no GPX geotagging UI in a map GPS is only parsed out of metadata text (crates/engine/src/cmd/library/gps.rs:3) and reverse-geocoded into place names (crates/engine/src/cmd/geocode.rs:312); there is no map to drag a photo onto."
 
 [verdict."lrc-map-locations"]
 title = "Saved locations"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:742"]
+evidence = ["crates/engine/src/cmd/geocode.rs:320", "crates/ui-egui/src/sidebar.rs:13"]
 commands = []
-note = "no saved locations"
+note = "no saved locations The only place-names source is the downloadable GeoNames list (crates/engine/src/cmd/geocode.rs:320), and the sidebar sections (crates/ui-egui/src/sidebar.rs:13) are albums, local, by date, folders and keywords — no saved locations."
 
 [verdict."lrc-map-tracklog"]
 title = "GPS track logs"
@@ -3858,9 +3858,9 @@ commands = ["photo.autoTagTracklog", "photo.tagFromTracklog"]
 title = "Location filter bar"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:744"]
+evidence = ["crates/ui-egui/src/panels/filterbar.rs:247", "crates/catalog/src/query.rs:21"]
 commands = []
-note = "no map filtering"
+note = "no map filtering The filter bar offers rating, flag, label, camera, lens and keyword pickers (crates/ui-egui/src/panels/filterbar.rs:247), and the Filter struct (crates/catalog/src/query.rs:21) has no location field."
 
 [verdict."lrc-map-revgeo"]
 title = "Reverse geocoding"
@@ -3874,81 +3874,81 @@ note = "missing: no sublocation (City / State / Country only, towns ≥15,000 pe
 title = "Book settings"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:746"]
+evidence = ["crates/engine/src/cmd.rs:143", "crates/ui-egui/src/docking.rs:14"]
 commands = []
-note = "no Book module"
+note = "no Book module The engine command registry (crates/engine/src/cmd.rs:143) has no book area, and the dockable panels (crates/ui-egui/src/docking.rs:14) are canvas, library, tools and presets — there is no Book module."
 
 [verdict."lrc-book-autolayout"]
 title = "Book auto layout"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:747"]
+evidence = ["crates/engine/src/print/layout.rs:871", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no auto-layout"
+note = "no auto-layout auto layout exists only for the print layout (crates/engine/src/print/layout.rs:871); the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-page"]
 title = "Book pages & templates"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:748"]
+evidence = ["crates/engine/src/print/layout.rs:813", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no page editing"
+note = "no page editing Pages exist only in the print layout (crates/engine/src/print/layout.rs:813); the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-guides"]
 title = "Book guides"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:749"]
+evidence = ["crates/engine/src/print/layout.rs:370", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no page guides"
+note = "no page guides The Guides struct belongs to the print layout (crates/engine/src/print/layout.rs:370), and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-cell"]
 title = "Book cell padding"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:750"]
+evidence = ["crates/engine/src/cmd/print.rs:392", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no cell editing"
+note = "no cell editing Cells are print cells (crates/engine/src/cmd/print.rs:392), and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-text"]
 title = "Book photo/page text"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:751"]
+evidence = ["crates/engine/src/cmd/print.rs:388", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no text editing"
+note = "no text editing The print layout settings (crates/engine/src/cmd/print.rs:388) carry no page text, and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-type"]
 title = "Book typography"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:752"]
+evidence = ["crates/engine/src/fonts.rs:9", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no type controls"
+note = "no type controls Typography is limited to the font model the slideshow overlays use (crates/engine/src/fonts.rs:9), and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-bg"]
 title = "Book backgrounds"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:753"]
+evidence = ["crates/engine/src/cmd/print.rs:388", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no background controls"
+note = "no background controls A page background exists only as a print setting (crates/engine/src/cmd/print.rs:388), and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-book-views"]
 title = "Book views"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:754"]
+evidence = ["crates/ui-egui/src/state/view.rs:5", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no book views"
+note = "no book views The view modes (crates/ui-egui/src/state/view.rs:5) and the command registry (crates/engine/src/cmd.rs:143) cover grid, loupe, compare, survey, reference and people — there is no book view."
 
 [verdict."lrc-book-export"]
 title = "Book export (PDF/JPEG)"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:755"]
+evidence = ["crates/engine/src/cmd/print.rs:405", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "no book export"
+note = "no book export print.exportPdf (crates/engine/src/cmd/print.rs:405) is the only page-document export, and the engine command registry (crates/engine/src/cmd.rs:143) has no book area."
 
 [verdict."lrc-ss-templates"]
 title = "Slideshow templates"
@@ -4000,9 +4000,9 @@ note = "missing: Classic's Repeat behaviour unverified; Inter SemiBold only; set
 title = "Slideshow music"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:762"]
+evidence = ["crates/engine/src/slideshow.rs:26", "crates/ui-egui/src/dialogs/slideshow_export.rs:100"]
 commands = []
-note = "no slideshow music"
+note = "no slideshow music The playback settings carry no music field — the struct documents itself as the Playback panel without music (crates/engine/src/slideshow.rs:26) — and the video export says music is not exported yet (crates/ui-egui/src/dialogs/slideshow_export.rs:100)."
 
 [verdict."lrc-ss-playback"]
 title = "Slideshow playback"
@@ -4164,9 +4164,9 @@ note = "missing: ours: E opens Edit (not the loupe); no compare / survey / light
 title = "Classic secondary-window keys"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:783"]
+evidence = ["crates/ui-egui/src/panels/second.rs:12", "crates/ui-egui/src/shortcuts.rs:214"]
 commands = []
-note = "no second window command"
+note = "no second window command The second window exists (crates/ui-egui/src/panels/second.rs:12) but only draws the active photo and binds no keys of its own, and the key tables (crates/ui-egui/src/shortcuts.rs:214) carry no secondary-window bindings."
 
 [verdict."keyc-catalog"]
 title = "Classic photo/catalog keys (⇧⌘I, ⌘', ⌘R, F2, ⌫, ⇧⌘E…)"
@@ -4219,9 +4219,9 @@ note = "missing: R / K / M / ⇧M bindings differ; no Classic keymap layer"
 title = "Book / slideshow / print / map / web keys"
 verdict = "ABSENT"
 level = "read"
-evidence = ["docs/parity-checklist.md:790"]
+evidence = ["crates/ui-egui/src/shortcuts.rs:214", "crates/engine/src/cmd.rs:143"]
 commands = []
-note = "modules not implemented"
+note = "modules not implemented Every command answers to the one global keymap — the extra Classic keys live in the ALIASES table (crates/ui-egui/src/shortcuts.rs:214) and there is no per-module key layer — and the engine command registry (crates/engine/src/cmd.rs:143) has no book, map or web area."
 
 [verdict."keyc-help"]
 title = "Classic help keys (⌘/, F1)"
