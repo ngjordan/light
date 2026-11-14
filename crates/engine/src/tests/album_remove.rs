@@ -103,3 +103,18 @@ fn remove_from_album_refuses_what_it_cannot_do() {
     assert!(s.execute("album.removePhotos", &json!({"id": "x"})).is_err(), "bad id");
     let _ = std::fs::remove_dir_all(&folder);
 }
+
+/// `cull` on an import runs assisted culling on the photos it added; without it nothing is scored.
+#[test]
+fn import_can_cull_what_it_added() {
+    let dir = temp_dir("cull-import");
+    png(&dir.join("a.png"), 0);
+    let mut s = Session::new().with_fs();
+    let r = s.execute("library.import", &json!({"paths": [dir.to_string_lossy()], "cull": true})).unwrap();
+    let id = r["imported"][0].as_u64().unwrap();
+    assert_eq!(r["cull"]["photos"][0]["id"].as_u64(), Some(id), "{r}");
+    let dir2 = temp_dir("cull-import-off");
+    png(&dir2.join("b.png"), 9);
+    let r = Session::new().with_fs().execute("library.import", &json!({"paths": [dir2.to_string_lossy()]})).unwrap();
+    assert!(r.get("cull").is_none());
+}
