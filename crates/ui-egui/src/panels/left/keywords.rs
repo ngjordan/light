@@ -35,10 +35,10 @@ fn keyword_row(app: &mut LightcraftApp, ui: &mut egui::Ui, n: &KeywordNode, id: 
     }
     crate::widgets::context_menu(&resp, |ui| {
         let has_sel = app.session.active().is_some();
-        if ui.add_enabled(has_sel, egui::Button::new(crate::i18n::tr("Add to Selected Photos"))).clicked() {
+        if ui.add_enabled(has_sel, egui::Button::new(crate::i18n::tr("Add to Selected Photos"))).on_disabled_hover_text(crate::i18n::tr("Select a photo first")).clicked() {
             let _ = app.run("photo.setMeta", json!({"addKeywords": [n.path]}));
         }
-        if ui.add_enabled(has_sel, egui::Button::new(crate::i18n::tr("Remove from Selected Photos"))).clicked() {
+        if ui.add_enabled(has_sel, egui::Button::new(crate::i18n::tr("Remove from Selected Photos"))).on_disabled_hover_text(crate::i18n::tr("Select a photo first")).clicked() {
             let _ = app.run("photo.setMeta", json!({"removeKeywords": [n.path]}));
         }
         ui.separator();

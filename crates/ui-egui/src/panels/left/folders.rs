@@ -201,7 +201,7 @@ pub(super) fn folder_menu(app: &mut LightcraftApp, resp: &egui::Response, a: &Al
                 let _ = app.run("library.selectAll", json!({}));
             };
             let has_photos = app.session.catalog.album_count(a.id) > 0;
-            if ui.add_enabled(has_photos, egui::Button::new(crate::i18n::tr("Export Album…"))).clicked() {
+            if ui.add_enabled(has_photos, egui::Button::new(crate::i18n::tr("Export Album…"))).on_disabled_hover_text(crate::i18n::tr("This album has no photos")).clicked() {
                 show_all(app);
                 let _ = app.run("dialog.export", json!({}));
             }

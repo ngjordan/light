@@ -1491,10 +1491,11 @@ fn context_menu_stack_and_edits(app: &mut LightcraftApp, ui: &mut egui::Ui, id: 
     if ui.button(crate::i18n::tr("Copy Edit Settings")).clicked() {
         let _ = app.run("develop.copy", json!({}));
     }
-    if ui.add_enabled(app.session.clipboard.is_some(), egui::Button::new(crate::i18n::tr("Paste Edit Settings"))).clicked() {
+    let paste_hint = crate::i18n::tr("Copy Edit Settings from a photo first");
+    if ui.add_enabled(app.session.clipboard.is_some(), egui::Button::new(crate::i18n::tr("Paste Edit Settings"))).on_disabled_hover_text(paste_hint).clicked() {
         let _ = app.run("develop.paste", json!({}));
     }
-    if ui.add_enabled(app.session.clipboard.is_some(), egui::Button::new(crate::i18n::tr("Paste Selected Settings…"))).clicked() {
+    if ui.add_enabled(app.session.clipboard.is_some(), egui::Button::new(crate::i18n::tr("Paste Selected Settings…"))).on_disabled_hover_text(paste_hint).clicked() {
         let _ = app.run("dialog.pasteSettings", json!({}));
     }
     if ui.button(crate::i18n::tr("Reset Edits")).clicked() {
@@ -1503,7 +1504,8 @@ fn context_menu_stack_and_edits(app: &mut LightcraftApp, ui: &mut egui::Ui, id: 
     crate::widgets::menu_button(ui, crate::i18n::tr("Photo Merge"), |ui| {
         let n = app.session.selected().len();
         for (id, label) in [("dialog.mergeHdr", "HDR…"), ("dialog.mergePanorama", "Panorama…"), ("dialog.mergeHdrPanorama", "HDR Panorama…")] {
-            if ui.add_enabled(n >= 2, egui::Button::new(crate::i18n::tr(label))).clicked() {
+            let b = ui.add_enabled(n >= 2, egui::Button::new(crate::i18n::tr(label))).on_disabled_hover_text(crate::i18n::tr("Select two or more photos to merge"));
+            if b.clicked() {
                 let _ = app.run(id, json!({}));
             }
         }

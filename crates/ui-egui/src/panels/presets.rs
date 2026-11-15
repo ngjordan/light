@@ -117,7 +117,7 @@ pub fn show(app: &mut LightcraftApp, ui: &mut egui::Ui) {
                 let _ = app.run("file.importPresets", json!({}));
             }
             let any_user = app.session.presets.iter().any(|p| !p.builtin);
-            if ui.add_enabled(any_user, egui::Button::new(crate::i18n::tr("Export User Presets…"))).clicked() {
+            if ui.add_enabled(any_user, egui::Button::new(crate::i18n::tr("Export User Presets…"))).on_disabled_hover_text(crate::i18n::tr("You have no saved presets yet")).clicked() {
                 let _ = app.run("file.exportPresets", json!({}));
             }
         });
@@ -268,6 +268,7 @@ pub fn show(app: &mut LightcraftApp, ui: &mut egui::Ui) {
                         ui.separator();
                         if ui
                             .add_enabled(app.session.active().is_some(), egui::Button::new(crate::i18n::tr("Update with Current Settings")))
+                            .on_disabled_hover_text(crate::i18n::tr("Select a photo first"))
                             .clicked()
                         {
                             match app.run("preset.update", json!({"id": pid})) {
